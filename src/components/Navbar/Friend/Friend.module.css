@@ -1,0 +1,16 @@
+.friend_wrap {
+    display: flex;
+}
+.friend_wrap img {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+.name {
+    margin-top: 15px;
+    margin-left: 10px;
+    color: white;
+}
+.friends {
+    margin-top: 5px;
+}

@@ -1,0 +1,19 @@
+.dialogs{
+    display: flex;
+}
+.dialogsItems {
+    padding: 20px;
+}
+.messages {
+    padding: 20px;
+}
+.dialog.active {
+    color: gold;
+}
+.dialog a {
+    text-decoration: none;
+    color: white;
+}
+.customActiveName {
+    color: gold !important;
+}
