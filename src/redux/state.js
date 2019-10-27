@@ -38,25 +38,27 @@ let store = {
     _callSubscriber() {
         console.log('dick');
     },
-    addPost() {
-        let newPost = {
-            id: 4,
-            post: this._state.profile.newPostText,
-            photo_url: 'https://pbs.twimg.com/media/C8ts2VHXkAATPOw.jpg',
-            likes: 0,
-        };
-        this._state.profile.posts.push(newPost);
-        this._state.profile.newPostText = '';
-        this._callSubscriber(this._state);
-    },
-    updateNewPostText (newText){
-        this._state.profile.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
+
     subscriber (observer) {
         this._callSubscriber = observer;
     },
-
+    
+    dispatch(action){
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 4,
+                post: this._state.profile.newPostText,
+                photo_url: 'https://pbs.twimg.com/media/C8ts2VHXkAATPOw.jpg',
+                likes: 0,
+            };
+            this._state.profile.posts.push(newPost);
+            this._state.profile.newPostText = '';
+            this._callSubscriber(this._state);
+        }else if(action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profile.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        }
+    }
 }
 
 
