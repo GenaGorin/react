@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-text';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 let store = {
     _state : {
@@ -25,7 +26,8 @@ let store = {
                 { id: 3, message: 'budesh suck?' },
                 { id: 4, message: 'omg' },
                 { id: 5, message: 'die' },
-            ]
+            ],
+            newMessageBody: "New",
         },
         friends: {
             friends:[
@@ -61,16 +63,21 @@ let store = {
             this._state.profile.newPostText = action.newText;
             this._callSubscriber(this._state);
         }else if(action.type === ADD_NEW_MESSAGE) {
+            let body = this._state.dialogs.newMessageBody;
+            this._state.dialogs.newMessageBody = '';
             let newMessage = {
-                id : 228,
-                message: action.message,
+                id : 6,
+                message: body,
             }
             let newDialog = {
-                id: 228,
+                id: 6,
                 name: 'Me',
             }
             this._state.dialogs.dialogs.push(newDialog);
             this._state.dialogs.messages.push(newMessage);
+            this._callSubscriber(this._state);
+        }else if(action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogs.newMessageBody = action.body;
             this._callSubscriber(this._state);
         }
     }
@@ -88,10 +95,15 @@ export const updateNewPostTextActionCreator = (text) => {
     }
 }
 
-export const addMessageActionCreator = (message) => {
+export const addMessageActionCreator = () => {
   return {
       type: ADD_NEW_MESSAGE,
-      message: message,
+    }
+}
+export const updateMessageBodyCreator = (body) => {
+  return {
+      type: UPDATE_NEW_MESSAGE_BODY,
+      body: body,
     }
 }
 
