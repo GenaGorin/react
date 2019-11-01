@@ -6,8 +6,11 @@ import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
+import Map from './components/Map/Map';
 import Settings from './components/Settings/Settings';
 import { Route } from "react-router-dom";
+
+
 
 const App = (props) => {
   return (
@@ -20,6 +23,7 @@ const App = (props) => {
           <Route path = '/news' component={News} />
           <Route path = '/music' component={Music} />
           <Route path = '/settings' component={Settings} />
+          <Route path = '/map' render = {()=><Map />} />
         </div>
       </div>);
 }
