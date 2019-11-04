@@ -9,20 +9,17 @@ const MyPosts = (props) => {
 
   let newPostElement = React.createRef();
 
-  let addPost = () => {
+  let onAddPost = () => {
    // let action = {
    //   type: 'ADD-POST',
    // };
-    props.dispatch(addPostActionCreator());
+    //props.dispatch(addPostActionCreator());
+    props.addPost();
   }
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    //let action = {
-     // type: 'UPDATE-NEW-POST-TEXT',
-     // newText: text,
-   // };
-    props.dispatch(updateNewPostTextActionCreator(text));
+    props.updateNewPostText(text);
   }
 
   return (
@@ -30,10 +27,10 @@ const MyPosts = (props) => {
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea onChange= {onPostChange} ref ={newPostElement} value ={props.newPostText} />
+          <textarea onChange= {onPostChange} ref ={newPostElement} value ={props.defaultValue} />
         </div>
         <div>
-          <button onClick={addPost} >Add</button>
+          <button onClick={onAddPost} >Add</button>
         </div>
       </div>
       <div className = {s.postWrapper}>

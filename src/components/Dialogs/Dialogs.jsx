@@ -11,16 +11,13 @@ const Dialogs = (props) => {
 
     let newMessageelement = React.createRef();
 
-    let sendMessage = () => {
-        //let text = newMessageelement.current.value;
-        let action = addMessageActionCreator();
-        props.dispatch(action);
+    let onSendMessage = () => {
+        props.sendMessage();
     }
 
     let onPostChange =(e) =>{
          let body = e.target.value;
-         let action = updateMessageBodyCreator(body);
-         props.dispatch(action);
+         props.postChange(body);
     }
     let componentsMessage = props.state.messages.map(message => <Message id={message.id} message={message.message} />);
     return (
@@ -32,7 +29,7 @@ const Dialogs = (props) => {
                 <div className={s.messages}>
                     {componentsMessage}
                     <textarea onChange= {onPostChange} value ={props.state.newMessageBody} ></textarea>
-                    <button onClick={sendMessage} >Send</button>
+                    <button onClick={onSendMessage} >Send</button>
                 </div>
             </div>
         </div>
