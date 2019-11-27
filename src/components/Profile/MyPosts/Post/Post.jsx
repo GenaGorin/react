@@ -4,7 +4,7 @@ import s from'./Post.module.css';
 const Post = (props) => {
     return ( 
         <div className ={s.item}>
-            <img src={props.url_image} alt="dick"/>
+            <img src={props.url_image} alt={props.id}/>
             {props.message}
             <div>
                 <span>Like - {props.likesCount}</span>
