@@ -5,14 +5,20 @@ import gorinGena from '../../assets/img/gorin.jpg';
 
 
 const Users = (props) => {
-        if (props.users.length === 0) {
-                axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                        props.setUsers(response.data.items);
-                });             
+
+        let getUsers = () => {
+                if (props.users.length === 0) {
+                        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                                props.setUsers(response.data.items);
+                        });             
+                }
         }
+        
 
     return (
-    <div>{props.users.map(user => <div key = {user.id} >
+    <div>
+            <button onClick={getUsers}>Get users</button>
+            {props.users.map(user => <div key = {user.id} >
             <span>
                     <img src={user.photos.small ?user.photos.small : gorinGena} className = {s.image} alt=""/>
                     {user.followed 
