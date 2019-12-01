@@ -36,8 +36,6 @@ const usersReducer = (state = initialState, action) => {
             }),
         };
         case SET_USERS:
-            let users = state;
-            debugger;
             return {
                 ...state,
                 users: [...state.users, ...action.users, ],
