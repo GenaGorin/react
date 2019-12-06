@@ -24,19 +24,23 @@ let Users = (props) => {
                         <img src={user.photos.small ? user.photos.small : gorinGena} className={s.image} alt="" />
                     </NavLink>
                     {user.followed
-                        ? <button onClick={() => {
+                        ? <button disabled ={props.followLoad.some(id => id === user.id? true: false)} onClick={() => {
+                            props.toggleFollowLoad(true, user.id);
                             unfollow(user.id).then(response => {
                                 if (response.data.resultCode === 0) {
                                     props.unfollow(user.id);
                                 }
+                                props.toggleFollowLoad(false, user.id);
                             });
 
                         }}>unfollow</button>
-                        : <button onClick={() => {
+                        : <button disabled ={props.followLoad.some(id => id === user.id? true: false)} onClick={() => {
+                            props.toggleFollowLoad(true, user.id);
                             follow(user.id).then(response => {
                                 if (response.data.resultCode === 0) {
                                     props.follow(user.id);
                                 }
+                                props.toggleFollowLoad(false, user.id);
                             });
                         }}>follow</button>}
                 </span>
