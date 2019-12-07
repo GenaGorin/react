@@ -1,3 +1,5 @@
+import { userAPI } from '../api/api';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -62,7 +64,7 @@ const usersReducer = (state = initialState, action) => {
         case TOGGLE_IS_FOLLOWING:
             return {
                 ...state,
-                followLoad: action.followLoad ? [...state.followLoad, action.userId] : state.followLoad.filter(id => id !=action.userId),
+                followLoad: action.followLoad ? [...state.followLoad, action.userId] : state.followLoad.filter(id => id != action.userId),
             }
         default:
             return state;
@@ -110,6 +112,41 @@ export const toggleFollowLoad = (followLoad, userId) => {
         type: TOGGLE_IS_FOLLOWING,
         followLoad: followLoad,
         userId: userId,
+    }
+}
+
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true));
+        userAPI.getUsers(currentPage, pageSize).then(response => {
+            dispatch(setUsers(response));
+            dispatch(toggleIsFetching(false));
+        });
+    }
+}
+
+export const followThunk = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowLoad(true, userId));
+        userAPI.follow(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(follow(userId));
+            }
+            dispatch(toggleFollowLoad(false, userId));
+        });
+    }
+}
+
+export const unfollowThunk = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowLoad(true, userId));
+        userAPI.unfollow(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(unfollow(userId));
+            }
+            dispatch(toggleFollowLoad(false,userId));
+        });
     }
 }
 

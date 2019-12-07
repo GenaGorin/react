@@ -1,8 +1,7 @@
 import React from 'react';
-import { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowLoad } from '../../redux/usersReducer';
+import { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowLoad, getUsers, followThunk, unfollowThunk } from '../../redux/usersReducer';
 import { connect } from "react-redux";
 import Users from './Users';
-import {getUsers} from '../../api/api';
 import Preloader from '../common/Preloader/Preloader';
 
 
@@ -10,22 +9,21 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         if (this.props.users.length === 0) {
-            this.props.toggleIsFetching(true);
-            getUsers(this.props.currentPage, this.props.pageSize).then(response => {
-                this.props.setUsers(response);
-                this.props.toggleIsFetching(false);
-            });
+            this.props.getUsers(this.props.currentPage, this.props.pageSize);   
         }
     }
 
     onPageChanged = (page) => {
-        //let pageNum = Number(page.target.innerHTML);
-        this.props.toggleIsFetching(true);
         this.props.setCurrentPage(page);
+        this.props.getUsers(page, this.props.pageSize);
+        //let pageNum = Number(page.target.innerHTML);
+        /*
+        this.props.toggleIsFetching(true);
         getUsers(page,this.props.pageSize).then(response => {
             this.props.setUsers(response);
             this.props.toggleIsFetching(false);
         });
+        */
     }
 
     render() {
@@ -33,7 +31,9 @@ class UsersContainer extends React.Component {
             {this.props.isFetching ? <Preloader /> : null}
             <Users
                 follow={this.props.follow}
+                followThunk = {this.props.followThunk}
                 unfollow={this.props.unfollow}
+                unfollowThunk = {this.props.unfollowThunk}
                 users={this.props.users}
                 totalUserCount={this.props.totalUserCount}
                 pageSize={this.props.pageSize}
@@ -91,5 +91,8 @@ export default connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     toggleIsFetching,
-    toggleFollowLoad
+    toggleFollowLoad,
+    getUsers,
+    followThunk,
+    unfollowThunk,
 })(UsersContainer);

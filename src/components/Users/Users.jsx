@@ -2,7 +2,7 @@ import React from 'react';
 import gorinGena from '../../assets/img/gorin.jpg';
 import s from './Users.module.css';
 import { NavLink } from "react-router-dom";
-import {follow, unfollow} from '../../api/api';
+import {userAPI} from '../../api/api';
 
 let Users = (props) => {
     let pageCount = Math.ceil(props.totalUserCount / props.pageSize);
@@ -25,23 +25,10 @@ let Users = (props) => {
                     </NavLink>
                     {user.followed
                         ? <button disabled ={props.followLoad.some(id => id === user.id? true: false)} onClick={() => {
-                            props.toggleFollowLoad(true, user.id);
-                            unfollow(user.id).then(response => {
-                                if (response.data.resultCode === 0) {
-                                    props.unfollow(user.id);
-                                }
-                                props.toggleFollowLoad(false, user.id);
-                            });
-
+                            props.unfollowThunk(user.id)
                         }}>unfollow</button>
                         : <button disabled ={props.followLoad.some(id => id === user.id? true: false)} onClick={() => {
-                            props.toggleFollowLoad(true, user.id);
-                            follow(user.id).then(response => {
-                                if (response.data.resultCode === 0) {
-                                    props.follow(user.id);
-                                }
-                                props.toggleFollowLoad(false, user.id);
-                            });
+                            props.followThunk(user.id);
                         }}>follow</button>}
                 </span>
                 <span>

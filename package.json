@@ -11,6 +11,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "2.1.1",
     "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
     "save": "^2.4.0",
     "yandex-map-react": "^1.1.1"
   },
