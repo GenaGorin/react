@@ -8,8 +8,11 @@ const samuraiApi = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
 });
 
-export const authMe = () => {
-    return samuraiApi.get(`auth/me`);
+
+export const authAPI = {
+    authMe() {
+        return samuraiApi.get(`auth/me`);
+    }
 }
 
 export const userAPI = {
@@ -21,5 +24,11 @@ export const userAPI = {
     },
     unfollow (userId) {
         return samuraiApi.delete(`follow/${userId}`);
+    }
+}
+
+export const profileAPI = {
+    getProfile(id) {
+        return samuraiApi.get('profile/'+id);
     }
 }

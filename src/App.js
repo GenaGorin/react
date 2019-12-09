@@ -10,6 +10,7 @@ import Map from './components/Map/Map';
 import UsersContainer from './components/Users/UsersContainer';
 import Settings from './components/Settings/Settings';
 import { Route } from "react-router-dom";
+import Login from './components/Login/Login';
 
 
 const App = (props) => {
@@ -25,6 +26,7 @@ const App = (props) => {
           <Route path = '/music' component={Music} />
           <Route path = '/settings' component={Settings} />
           <Route path = '/map' render = {()=><Map />} />
+          <Route path = '/Login' render = {()=><Login />} />
         </div>
       </div>);
 }
