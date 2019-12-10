@@ -30,5 +30,13 @@ export const userAPI = {
 export const profileAPI = {
     getProfile(id) {
         return samuraiApi.get('profile/'+id);
+    },
+    getStatus(id) {
+        return samuraiApi.get('/profile/status/'+id);
+    },
+    updateStatus(status) {
+        return samuraiApi.put('/profile/status', {
+            status: status,
+        });
     }
 }
