@@ -5,7 +5,7 @@ class ProfileStatus extends React.Component {
     state = {
         editMode: false,
     }
-    changeLocalState(bool){
+    startOrStopEditMode (bool){
         this.setState({
             editMode: bool,
         });
@@ -15,10 +15,10 @@ class ProfileStatus extends React.Component {
             <div>
                 {this.state.editMode ?
                     <div>
-                        <input autoFocus = {true} onBlur = {() => {this.changeLocalState(false)}} type="text" value={this.props.status} />
+                        <input autoFocus = {true} onBlur = {() => {this.startOrStopEditMode(false)}} type="text" value={this.props.status} />
                     </div>
                     :
-                    <div onDoubleClick = {() => {this.changeLocalState(true)}}>
+                    <div onDoubleClick = {() => {this.startOrStopEditMode(true)}}>
                         <span>{this.props.status}</span>
                     </div>
                 }
