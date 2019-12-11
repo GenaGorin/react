@@ -45,5 +45,14 @@ export const setMeThunk = () => {
     }
 }
 
+export const loginThunk = (formData) => {
+    debugger;
+    return (dispatch) => {
+        authAPI.login(formData).then(response => {
+            console.log(response);
+        });
+    }
+}
+
 
 export default authReducer;

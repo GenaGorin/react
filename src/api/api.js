@@ -12,6 +12,9 @@ const samuraiApi = axios.create({
 export const authAPI = {
     authMe() {
         return samuraiApi.get(`auth/me`);
+    },
+    login(loginData) {
+        return samuraiApi.post('/auth/login', loginData);
     }
 }
 
