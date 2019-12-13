@@ -21,7 +21,7 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             let newPost = {
                 id: 4,
-                post: state.newPostText,
+                post: action.text,
                 photo_url: 'https://pbs.twimg.com/media/C8ts2VHXkAATPOw.jpg',
                 likes: 0,
             };
@@ -54,15 +54,10 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (text) => {
     return {
         type: ADD_POST,
-    }
-}
-export const updateNewPostTextActionCreator = (text) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text,
+        text: text,
     }
 }
 
