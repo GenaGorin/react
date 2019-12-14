@@ -15,6 +15,9 @@ export const authAPI = {
     },
     login(loginData) {
         return samuraiApi.post('/auth/login', loginData);
+    },
+    logout() {
+        return samuraiApi.delete('/auth/login');
     }
 }
 

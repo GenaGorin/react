@@ -1,4 +1,5 @@
 import { authAPI } from '../api/api';
+import {stopSubmit} from 'redux-form';
 
 const SET_ME = 'SET_ME';
 
@@ -46,10 +47,24 @@ export const setMeThunk = () => {
 }
 
 export const loginThunk = (formData) => {
-    debugger;
     return (dispatch) => {
         authAPI.login(formData).then(response => {
-            console.log(response);
+            if (response.data.resultCode === 0) {
+                dispatch(setMeThunk());   
+            }else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+                dispatch(stopSubmit('login', {_error: message,}));
+            }
+        });
+    }
+}
+
+export const logoutThunk = () => {
+    return (dispatch) => {
+        authAPI.logout().then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setMe(null, null, null, false));   
+            }
         });
     }
 }
