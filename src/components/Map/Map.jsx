@@ -20,7 +20,7 @@ class Mymap extends React.Component {
   }
 
   render() {
-    return (<div id='map' className={s.map}>My awesome application with maps!</div>)
+    return (<div id='map' className={s.map}>Tets!</div>)
   }
 }
 
