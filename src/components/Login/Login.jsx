@@ -2,16 +2,20 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from "react-redux";
 import {loginThunk} from '../../redux/AuthReducer';
+import {Input} from '../common/FromsControls/FormControls';
+import {required, maxLengthCreator, test} from '../../utils/validators/validators';
 
+
+const maxLength5 = maxLengthCreator(5);
 
 const LoginForm = (props) => {
     return (
         <form onSubmit = {props.handleSubmit}>
             <div>
-                <Field type="text" placeholder='email' name='email' component="input" />
+                <Field type="text" placeholder='email' name='email' component={Input} validate = {[required, maxLength5]}/>
             </div>
             <div>
-                <Field type="password" placeholder='password' name='password' component="input" />
+                <Field type="password" placeholder='password' name='password' component={Input} validate = {[required, maxLength5]} />
             </div>
             <div>
                 <Field type="checkbox" name='rememberMe' component="input" />rememberMe

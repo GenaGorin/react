@@ -3,25 +3,12 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profileReducer';
 import { Field, reduxForm } from 'redux-form';
+import {required, maxLengthCreator, test} from '../../../utils/validators/validators';
+import {Textarea} from '../../common/FromsControls/FormControls';
 
 
 const MyPosts = (props) => {
   let componentsPost = props.posts.map(post => <Post message={post.post} id={post.id} key={post.id} url_image={post.photo_url} likesCount={post.likes} />);
-
-  let newPostElement = React.createRef();
-
-  let onAddPost = () => {
-    // let action = {
-    //   type: 'ADD-POST',
-    // };
-    //props.dispatch(addPostActionCreator());
-    props.addPost();
-  }
-
-  let onPostChange = () => {
-    let text = newPostElement.current.value;
-    props.updateNewPostText(text);
-  }
 
   let createNewWallPost = (formData) => {
     console.log(formData);
@@ -42,11 +29,14 @@ const MyPosts = (props) => {
   );
 }
 
+const maxLength5 = maxLengthCreator(5);
+
+
 const WallPostForm = (props) => {
   return (
     <form onSubmit = {props.handleSubmit}>
       <div>
-        <Field type="text" placeholder='text' name='wallPostText' component="textarea" />
+        <Field type="text" placeholder='АУе челяба' name='wallPostText' component={Textarea} validate = {[required, maxLength5]}/>
       </div>
       <div>
         <button>Add</button>
