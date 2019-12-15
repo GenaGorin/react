@@ -37,7 +37,7 @@ export const setMe = (userId, email, login, isAuth) => {
 
 export const setMeThunk = () => {
     return (dispatch) => {
-        authAPI.authMe().then(response => {
+        return authAPI.authMe().then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data;
                 dispatch(setMe(id, email, login, true));
