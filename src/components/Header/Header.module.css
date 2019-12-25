@@ -1,9 +1,23 @@
 .header {
   grid-area: h;
-  background-color: green;
+  background-color:#359ad6;
   display: flex;
   justify-content: space-between;
 }
 .header img {
-  width: 20px;
+  width: 55px;
+}
+
+.header div {
+  margin-top: 15px;
+  margin-right: 10px;
+}
+
+.header div a {
+  color: white;
+  text-decoration: none;
+}
+
+.header div a:hover {
+  text-decoration: underline;
 }

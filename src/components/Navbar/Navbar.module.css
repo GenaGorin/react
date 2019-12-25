@@ -1,6 +1,8 @@
 .nav {
   grid-area: n;
-  background-color: burlywood;
+  background-color: #328fe3;
+  padding-left: 15px;
+  padding-top: 10px;
 }
 .item {
     color: white;
@@ -11,7 +13,7 @@
   color: white;
 }
 a.activepage {
-  color: gold;
+  color: #42ff57;
 }
 .all_friends_wrap {
   margin-bottom: 20px;

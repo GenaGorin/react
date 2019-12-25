@@ -2,10 +2,10 @@ const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 
 let initialState = {
     dialogs: [
-        { id: 1, name: 'Mathew228' },
-        { id: 2, name: 'vAle1488r' },
-        { id: 3, name: 'Leha' },
-        { id: 4, name: 'Chesak' },
+        { id: 1, name: 'Mathew' },
+        { id: 2, name: 'Valeriy' },
+        { id: 3, name: 'Alexey' },
+        { id: 4, name: 'Artem' },
         { id: 5, name: 'Gaylord' },
     ],
     messages: [

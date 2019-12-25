@@ -10,7 +10,7 @@ import {required, maxLengthCreator, test} from '../../utils/validators/validator
 const DialogsForm = (props) => {
     return (<form onSubmit={props.handleSubmit}>
         <Field type="text" placeholder='text' name='newMessageText' component={Textarea} validate = {[required, maxLength10]}/>
-        <button  >Send</button>
+        <button>Send</button>
     </form>);
 }
 
