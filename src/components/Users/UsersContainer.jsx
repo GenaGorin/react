@@ -63,7 +63,7 @@ let mapStateToProps = (state) => {
 
 let mapStateToProps = (state) => {
     return {
-        users: getUsersSelector(state),
+        users: getUsersSuperSelector(state),
         pageSize: getPageSizeSelector(state),
         totalUserCount: getTotalUsersCountSelector(state),
         currentPage: getCurrentPage(state),
