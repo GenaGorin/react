@@ -2,6 +2,8 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
+import {componentOpenWithSound} from '../../hoc/withAuthRtedirect';
+
 
 const Profile = (props) => {
   return (
@@ -12,4 +14,4 @@ const Profile = (props) => {
   )
 }
 
-export default Profile;
+export default componentOpenWithSound(Profile);

@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './News.module.css';
+import {componentOpenWithSound} from '../../hoc/withAuthRtedirect';
 
 const News = () => {
     return (
@@ -7,4 +8,4 @@ const News = () => {
     )
 }
 
-export default News;
+export default componentOpenWithSound(News);

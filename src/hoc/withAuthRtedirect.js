@@ -1,6 +1,7 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
+import sound from '../assets/sounds/69880c1f5e57698.mp3';
 
 
 export const withAuthRedirect = (Component) => {
@@ -19,4 +20,19 @@ export const withAuthRedirect = (Component) => {
             }
         }
         return connect(mapStateToProps)(RedirectComponent);
+}
+
+export const componentOpenWithSound = (Component) => {
+    let withSoundComponent = (props) => {
+        let startAudio = () => {
+            console.log(sound);
+            var audio = new Audio(); // Создаём новый элемент Audio
+            audio.src = sound; // Указываем путь к звуку "клика"
+            audio.autoplay = true;
+          }
+        
+        startAudio();
+        return < Component {...props} />
+    }
+    return withSoundComponent;
 }

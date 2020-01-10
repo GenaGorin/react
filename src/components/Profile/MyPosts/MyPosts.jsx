@@ -5,6 +5,7 @@ import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../r
 import { Field, reduxForm } from 'redux-form';
 import { required, maxLengthCreator, test } from '../../../utils/validators/validators';
 import { Textarea } from '../../common/FromsControls/FormControls';
+import sound from '../../../assets/sounds/69880c1f5e57698.mp3';
 
 
 const MyPosts = React.memo( props => {
@@ -15,7 +16,7 @@ const MyPosts = React.memo( props => {
     //props.updateNewPostText(formData.wallPostText);
     props.addPost(formData.wallPostText);
   }
-  console.log('render');
+  
 
   return (
     <div className={s.mypostMainWrapp}>
