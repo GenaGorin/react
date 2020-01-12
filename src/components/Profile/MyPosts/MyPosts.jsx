@@ -9,7 +9,7 @@ import sound from '../../../assets/sounds/69880c1f5e57698.mp3';
 
 
 const MyPosts = React.memo( props => {
-  let componentsPost = props.posts.map(post => <Post message={post.post} id={post.id} key={post.id} url_image={post.photo_url} likesCount={post.likes} />);
+  let componentsPost = [...props.posts].reverse().map(post => <Post message={post.post} id={post.id} key={post.id} url_image={post.photo_url} likesCount={post.likes} />);
 
   let createNewWallPost = (formData) => {
     console.log(formData);
