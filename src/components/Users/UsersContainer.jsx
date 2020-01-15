@@ -1,9 +1,10 @@
 import React from 'react';
-import { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowLoad, getUsers, followThunk, unfollowThunk } from '../../redux/usersReducer';
+import { setUsers, setCurrentPage, toggleIsFetching, toggleFollowLoad, getUsers, followThunk, unfollowThunk } from '../../redux/usersReducer';
 import { connect } from "react-redux";
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import {getUsersSuperSelector, getUsersSelector, getPageSizeSelector, getTotalUsersCountSelector, getCurrentPage, getUsersIsFetching, getUsersFollowLoad} from '../../redux/usersSelector';
+import Paginator from '../common/Paginator/Paginator';
 
 
 class UsersContainer extends React.Component {
@@ -30,10 +31,11 @@ class UsersContainer extends React.Component {
     render() {
         return (<>
             {this.props.isFetching ? <Preloader /> : null}
+            <Paginator totalUserCount = {this.props.totalUserCount} pageSize = {this.props.pageSize} currentPage = {this.props.currentPage} onPageChanged = {this.onPageChanged}/>
             <Users
-                follow={this.props.follow}
+                //follow={this.props.follow}
                 followThunk = {this.props.followThunk}
-                unfollow={this.props.unfollow}
+                //unfollow={this.props.unfollow}
                 unfollowThunk = {this.props.unfollowThunk}
                 users={this.props.users}
                 totalUserCount={this.props.totalUserCount}
@@ -71,7 +73,7 @@ let mapStateToProps = (state) => {
         followLoad: getUsersFollowLoad(state),
     }
 }
-
+/*
 let mapDispatchToProps = (dispatch) => {
     return {
         follow: (userId) => {
@@ -96,11 +98,9 @@ let mapDispatchToProps = (dispatch) => {
         }
     }
 }
-
+*/
 
 export default connect(mapStateToProps, {
-    follow,
-    unfollow,
     setUsers,
     setCurrentPage,
     toggleIsFetching,

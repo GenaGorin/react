@@ -25,7 +25,7 @@ export const withAuthRedirect = (Component) => {
 export const componentOpenWithSound = (Component) => {
     let withSoundComponent = (props) => {
         let startAudio = () => {
-            console.log(sound);
+            //console.log(sound);
             var audio = new Audio(); // Создаём новый элемент Audio
             audio.src = sound; // Указываем путь к звуку "клика"
             audio.autoplay = true;

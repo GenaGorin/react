@@ -1,7 +1,7 @@
 import { authAPI } from '../api/api';
-import {stopSubmit} from 'redux-form';
+import { stopSubmit } from 'redux-form';
 
-const SET_ME = 'SET_ME';
+const SET_ME = 'auth/SET_ME';
 
 let initialState = {
     id: null,
@@ -35,38 +35,32 @@ export const setMe = (userId, email, login, isAuth) => {
     }
 }
 
-export const setMeThunk = () => {
-    return (dispatch) => {
-        return authAPI.authMe().then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data;
-                dispatch(setMe(id, email, login, true));
-            }
-        });
-    }
+export const setMeThunk = () => async (dispatch) => {
+        let response = await authAPI.authMe();
+
+        if (response.data.resultCode === 0) {
+            let { id, email, login } = response.data.data;
+            //console.log(response.data);
+            dispatch(setMe(id, email, login, true));
+        }
 }
 
-export const loginThunk = (formData) => {
-    return (dispatch) => {
-        authAPI.login(formData).then(response => {
+export const loginThunk = (formData) => async (dispatch) => {
+        let response = await authAPI.login(formData);
             if (response.data.resultCode === 0) {
-                dispatch(setMeThunk());   
-            }else {
+                //console.log(response.data);
+                dispatch(setMeThunk());
+            } else {
                 let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
-                dispatch(stopSubmit('login', {_error: message,}));
+                dispatch(stopSubmit('login', { _error: message, }));
             }
-        });
-    }
 }
 
-export const logoutThunk = () => {
-    return (dispatch) => {
-        authAPI.logout().then(response => {
+export const logoutThunk = () => async (dispatch) => {
+        let response = await authAPI.logout();
             if (response.data.resultCode === 0) {
-                dispatch(setMe(null, null, null, false));   
+                dispatch(setMe(null, null, null, false));
             }
-        });
-    }
 }
 
 
