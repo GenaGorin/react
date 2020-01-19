@@ -31,7 +31,7 @@ class UsersContainer extends React.Component {
     render() {
         return (<>
             {this.props.isFetching ? <Preloader /> : null}
-            <Paginator totalUserCount = {this.props.totalUserCount} pageSize = {this.props.pageSize} currentPage = {this.props.currentPage} onPageChanged = {this.onPageChanged}/>
+            <Paginator portionSize = {25} totalUserCount = {this.props.totalUserCount} pageSize = {this.props.pageSize} currentPage = {this.props.currentPage} onPageChanged = {this.onPageChanged}/>
             <Users
                 //follow={this.props.follow}
                 followThunk = {this.props.followThunk}

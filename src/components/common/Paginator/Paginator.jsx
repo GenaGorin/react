@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import s from './Paginator.module.css';
 
 let Paginator = (props) => {
-    let portionSize = 30;
+    let portionSize = props.portionSize;
     let pageCount = Math.ceil(props.totalUserCount / props.pageSize);
     let pages = [];
     let allPortions = Math.ceil(pageCount / portionSize);
