@@ -1,10 +1,12 @@
 import { profileAPI } from '../api/api';
+import { stopSubmit } from 'redux-form';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-text';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const UPDATE_PROFILE_STATUS = 'UPDATE_PROFILE_STATUS';
 const DELETE_POST = 'DELETE_POST';
+const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
 
 let initialState = {
     newPostText: 'Post text',
@@ -39,6 +41,12 @@ const profileReducer = (state = initialState, action) => {
             };
         }
         case SET_USER_PROFILE: {
+            return {
+                ...state,
+                profile: action.profile
+            };
+        }
+        case UPDATE_USER_PROFILE: {
             return {
                 ...state,
                 profile: action.profile
@@ -87,6 +95,23 @@ export const setUserProfile = (profile) => {
 export const getProfileThunk = (userId) => async (dispatch) => {
     let response = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(response.data));
+}
+
+const updateProfileData = (formData) => {
+    return {
+        type: UPDATE_USER_PROFILE,
+        profile: formData,
+    }
+}
+
+export const sendProfileDataThunk = (formData) => async (dispatch) => {
+    let response = await profileAPI.saveProfile(formData);
+    if (response.data.resultCode === 0) {
+        dispatch(updateProfileData(formData));
+    }else {
+        dispatch(stopSubmit('profileData', { _error: response.data.messages[0], }));
+        return Promise.reject(response.data.messages[0]);
+    }
 }
 
 const setProfileStatus = (status) => {

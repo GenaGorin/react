@@ -5,7 +5,7 @@ import Friend from './Friend/Friend';
 
 const Navbar = (props) => {
     let componentsFriends = props.friends.map((el) => {
-        return <Friend id={el.id} name={el.name} photo_url={el.photo_url} />;
+        return <Friend key = {el.id} id={el.id} name={el.name} photo_url={el.photo_url} />;
     });
     //let componentsFriends = 'dick';
     return <nav className={s.nav}>

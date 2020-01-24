@@ -14,14 +14,15 @@ const ProfileStatusWithHooks = (props) => {
         let value = e.currentTarget.value;
         setStatus(value);
     }
-    useEffect(()=>{
+    useEffect(() => {
         setStatus(props.status);
-    },[props.status]);
+    }, [props.status]);
     return (
         <div>
+            Status :
             {editMode ?
                 <div>
-                    <input onChange = {onStatusChange} autoFocus={true} type="text" value={status} onBlur={deactivateEditMode} />
+                    <input onChange={onStatusChange} autoFocus={true} type="text" value={status} onBlur={deactivateEditMode} />
                 </div>
                 :
                 <div >
@@ -31,5 +32,6 @@ const ProfileStatusWithHooks = (props) => {
         </div>
     )
 }
+
 
 export default ProfileStatusWithHooks;

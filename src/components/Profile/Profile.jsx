@@ -8,7 +8,7 @@ import {componentOpenWithSound} from '../../hoc/withAuthRtedirect';
 const Profile = (props) => {
   return (
     <div>
-      <ProfileInfo profile = {props.profile} status = {props.status} updateProfileStatus = {props.updateProfileStatus}/>
+      <ProfileInfo sendProfileDataThunk = {props.sendProfileDataThunk} profile = {props.profile} status = {props.status} updateProfileStatus = {props.updateProfileStatus}/>
       <MyPostsContainer />
     </div>
   )

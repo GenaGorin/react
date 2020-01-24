@@ -44,5 +44,8 @@ export const profileAPI = {
         return samuraiApi.put('/profile/status', {
             status: status,
         });
+    },
+    saveProfile(formData) {
+        return samuraiApi.put('/profile', formData);
     }
 }
