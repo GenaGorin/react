@@ -47,5 +47,12 @@ export const profileAPI = {
     },
     saveProfile(formData) {
         return samuraiApi.put('/profile', formData);
+    },
+    savePhoto(file) {
+        let formData = new FormData();
+        formData.append('image', file);
+        return samuraiApi.put('/profile/photo', formData, {
+            headers: {'Content-Type': 'multipart/form-data' }
+        });
     }
 }

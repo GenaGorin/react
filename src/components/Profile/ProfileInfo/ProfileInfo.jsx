@@ -4,6 +4,7 @@ import Preloader from '../../common/Preloader/Preloader';
 import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import ProfileDataReduxForm from './ProfileDataForm';
+import PlaceholderImage from '../../../assets/img/img-placeholder.jpg';
 
 const ProfileInfo = (props) => {
   let [editMode, setEditMode] = useState(false);
@@ -21,17 +22,24 @@ const ProfileInfo = (props) => {
   }
 
 
+  let onAvaSelected = (e) => {
+    if (e.target.files.length) {
+      props.saveFileThunk(e.target.files[0]);
+    }
+  }
+
   return (
     <div>
       <div>
         <img src='https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350' />
       </div>
       <div className={s.descriptionBlock}>
-        <img src={props.profile.photos.large} alt="test" />
+        <img src={props.profile.photos.large ? props.profile.photos.large: PlaceholderImage} alt="ava alt" />
+        {props.isOwner ? <input type ='file' onChange = {onAvaSelected} /> : ''}
         < ProfileStatusWithHooks status={props.status} updateProfileStatus={props.updateProfileStatus} />
         {editMode 
         ?< ProfileDataReduxForm initialValues = {props.profile} onSubmit={saveProfileData} />
-        :<ProfileUserInfoBlock goToEditMode = {goToEditMode} profile = {props.profile} isOwner = {true} />}
+        :<ProfileUserInfoBlock goToEditMode = {goToEditMode} profile = {props.profile} isOwner = {props.isOwner} />}
       </div>
     </div>
   )

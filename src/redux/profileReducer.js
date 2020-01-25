@@ -7,6 +7,7 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const UPDATE_PROFILE_STATUS = 'UPDATE_PROFILE_STATUS';
 const DELETE_POST = 'DELETE_POST';
 const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
+const UPDATE_PROFILE_PHOTO = 'UPDATE_PROFILE_PHOTO';
 
 let initialState = {
     newPostText: 'Post text',
@@ -66,6 +67,15 @@ const profileReducer = (state = initialState, action) => {
                 })
             }
         }
+        case UPDATE_PROFILE_PHOTO: {
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    photos: action.photos,
+                }
+            }
+        }
         default:
             return state;
     }
@@ -104,11 +114,18 @@ const updateProfileData = (formData) => {
     }
 }
 
+const savePhotoSuccess = (photos) => {
+    return {
+        type: UPDATE_PROFILE_PHOTO,
+        photos: photos,
+    }
+}
+
 export const sendProfileDataThunk = (formData) => async (dispatch) => {
     let response = await profileAPI.saveProfile(formData);
     if (response.data.resultCode === 0) {
         dispatch(updateProfileData(formData));
-    }else {
+    } else {
         dispatch(stopSubmit('profileData', { _error: response.data.messages[0], }));
         return Promise.reject(response.data.messages[0]);
     }
@@ -130,6 +147,13 @@ export const updateProfileStatus = (status) => async (dispatch) => {
     let response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === 0) {
         dispatch(setProfileStatus(status));
+    }
+}
+
+export const saveFileThunk = (file) => async (dispatch) => {
+    let response = await profileAPI.savePhoto(file);
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos));
     }
 }
 

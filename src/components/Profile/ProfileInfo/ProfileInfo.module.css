@@ -1,6 +1,10 @@
 .descriptionBlock {
     padding: 20px;
 }
+.descriptionBlock img {
+    width: 250px;
+    height: 250px;
+}
 .singleContact {
     margin-left: 10px;
 }
