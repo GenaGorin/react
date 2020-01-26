@@ -18,6 +18,9 @@ export const authAPI = {
     },
     logout() {
         return samuraiApi.delete('/auth/login');
+    },
+    getCaptcha() {
+        return samuraiApi.get(`security/get-captcha-url`);
     }
 }
 

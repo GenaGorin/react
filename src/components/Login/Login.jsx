@@ -28,6 +28,12 @@ const LoginForm = (props) => {
             </div> :
             <div></div>
             }
+            {props.captchaUrl ? 
+            <div>
+            <img src={props.captchaUrl} alt="captcha"/> 
+            <Field type="text" placeholder='Captcha' name='captcha' component={Input}/>
+            </div>
+            : ''}
             <div>
                 <button>Login</button>
             </div>
@@ -48,7 +54,7 @@ const Login = (props) => {
 
     return <div>
         <h1>Login</h1>
-        <LoginReduxFrom onSubmit = {onSubmit}/>
+        <LoginReduxFrom captchaUrl = {props.captchaUrl} onSubmit = {onSubmit}/>
     </div>
 }
 
@@ -59,6 +65,7 @@ const LoginReduxFrom = reduxForm({
 let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl,
     }
 }
 
