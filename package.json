@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://genagorin.github.io/react",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "postscribe": "^2.0.8",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
